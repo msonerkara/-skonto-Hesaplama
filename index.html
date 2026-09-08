@@ -99,6 +99,43 @@ hr{
 
 <body>
 
+<script>
+
+const SURUM = "v1";
+const SIFRE = "2505";
+
+if(localStorage.getItem("giris") !== SURUM){
+
+    const girilen = prompt(
+        "Şifre Giriniz"
+    );
+
+    if(girilen !== SIFRE){
+
+        document.body.innerHTML = `
+            <div style="
+                text-align:center;
+                margin-top:100px;
+                font-family:Arial;
+            ">
+                <h2>Erişim Yetkiniz Yok</h2>
+            </div>
+        `;
+
+        throw new Error(
+            "Yetkisiz erişim"
+        );
+    }
+
+    localStorage.setItem(
+        "giris",
+        SURUM
+    );
+}
+
+</script>
+
+
 
 <div class="tabs">
 
