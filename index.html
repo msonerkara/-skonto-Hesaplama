@@ -582,8 +582,9 @@ function vadeHesapla(vadeTarihi){
     );
 
     return Math.floor(
-        (valor - bugun) / 86400000
-    );
+    (valor - bugun) / 86400000
+) + 1;
+
 }
 
 
