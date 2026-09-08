@@ -536,22 +536,22 @@ EXCEL FORMÜLÜ:
 
 function vadeHesapla(vadeTarihi){
 
-    // Vadeden sonraki ilk iş günü
-    let valor = excelIsGunu(vadeTarihi, 1);
+    let bazTarih = new Date(vadeTarihi);
 
-    // Valörün ertesi günü
-    let ertesiGun = new Date(valor);
-    ertesiGun.setDate(ertesiGun.getDate() + 1);
-
-    // Ertesi gün tatilse valörü ileri taşı
-    if (!isIsGunu(ertesiGun)) {
-
-        do {
-            valor.setDate(valor.getDate() + 1);
+    // Vade tatilse önce iş gününe çek
+    if(!isIsGunu(bazTarih)){
+        while(!isIsGunu(bazTarih)){
+            bazTarih.setDate(
+                bazTarih.getDate() + 1
+            );
         }
-        while (!isIsGunu(valor));
-
     }
+
+    // Sonraki iş günü = valör
+    let valor = excelIsGunu(
+        bazTarih,
+        1
+    );
 
     let bugun = new Date(
         new Date().getFullYear(),
@@ -563,6 +563,7 @@ function vadeHesapla(vadeTarihi){
         (valor - bugun) / 86400000
     );
 }
+
 
 
 
