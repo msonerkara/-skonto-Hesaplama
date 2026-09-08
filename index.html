@@ -561,17 +561,22 @@ function vadeHesapla(vadeTarihi){
         ertesiGun.getDate() + 1
     );
 
-    // ertesi gün tatilse
-    // valörü sonraki iş gününe taşı
-    if(!isIsGunu(ertesiGun)){
+    let vadeTatildi = !isIsGunu(vadeTarihi);
 
-        valor =
-            excelIsGunu(
-                valor,
-                1
-            );
+// Sadece vade tatilse bu kontrol çalışsın
+if(
+    vadeTatildi &&
+    !isIsGunu(ertesiGun)
+){
 
-    }
+    valor =
+        excelIsGunu(
+            valor,
+            1
+        );
+
+}
+
 
     let bugun = new Date();
 
