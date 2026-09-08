@@ -536,80 +536,33 @@ EXCEL FORMÜLÜ:
 
 function vadeHesapla(vadeTarihi){
 
-
-    /*
-    K4 - 1
-    */
-
-    let birGunOnce =
-        new Date(
-            vadeTarihi.getFullYear(),
-            vadeTarihi.getMonth(),
-            vadeTarihi.getDate()
-        );
-
-    birGunOnce.setDate(
-        birGunOnce.getDate()-1
+    // 2 takvim günü ekle
+    let valor = new Date(
+        vadeTarihi.getFullYear(),
+        vadeTarihi.getMonth(),
+        vadeTarihi.getDate()
     );
 
+    valor.setDate(valor.getDate() + 2);
 
-    /*
-    İŞGÜNÜ(K4-1;1;N4:N36)
-    */
+    // Tatil veya hafta sonuysa ileri taşı
+    while(!isIsGunu(valor)){
+        valor.setDate(valor.getDate() + 1);
+    }
 
-    let ilkIsGunu =
-        excelIsGunu(
-            birGunOnce,
-            1
-        );
+    // Bugün
+    let bugun = new Date();
 
+    bugun = new Date(
+        bugun.getFullYear(),
+        bugun.getMonth(),
+        bugun.getDate()
+    );
 
-    /*
-    İŞGÜNÜ(ilk sonuç;1;N4:N36)
-    */
-
-    let ikinciIsGunu =
-        excelIsGunu(
-            ilkIsGunu,
-            1
-        );
-
-
-    /*
-    BUGÜN()
-    */
-
-    let bugun =
-        new Date();
-
-    bugun =
-        new Date(
-            bugun.getFullYear(),
-            bugun.getMonth(),
-            bugun.getDate()
-        );
-
-
-    /*
-    Excel:
-    
-    sonuç + 1 - BUGÜN()
-
-    */
-
-    let fark =
-        Math.round(
-            (
-                ikinciIsGunu -
-                bugun
-            )
-            /
-            86400000
-        );
-
-
-    return fark + 1;
-
+    // Gün farkı
+    return Math.round(
+        (valor - bugun) / 86400000
+    );
 }
 
 
