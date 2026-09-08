@@ -3,449 +3,799 @@
 
 <head>
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<link rel="manifest" href="manifest.json">
 
 <title>İskonto Pro V4</title>
 
-	
-	<style>
-		body{
-font-family:Arial,sans-serif;
-background:#f4f6fa;
-padding:0;
-margin:0;
+<style>
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f6fa;
+    padding:0;
+    margin:0;
 }
-
-
-
 
 .card{
-background:white;
-padding:20px;
-border-radius:15px;
-box-shadow:0 3px 15px rgba(0,0,0,.15);
-width:100%;
-max-width:100%;
-margin:0;
-box-sizing:border-box;
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 3px 15px rgba(0,0,0,.15);
+    width:100%;
+    box-sizing:border-box;
 }
 
+h2{
+    margin-top:0;
+}
 
+input{
+    width:100%;
+    padding:12px;
+    margin:8px 0;
+    box-sizing:border-box;
+    border:1px solid #ccc;
+    border-radius:8px;
+}
 
-		h2 {
-			margin-top: 0;
-		}
+button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:8px;
+    background:#2563eb;
+    color:white;
+    font-size:16px;
+    margin-top:5px;
+}
 
-		input {
-			width: 100%;
-			padding: 12px;
-			margin: 8px 0;
-			box-sizing: border-box;
-			border: 1px solid #ccc;
-			border-radius: 8px;
-		}
+.result{
+    background:#eef5ff;
+    padding:15px;
+    border-radius:10px;
+    margin-top:15px;
+    border-left:5px solid #2563eb;
+}
 
-		button {
-			width: 100%;
-			padding: 14px;
-			border: none;
-			border-radius: 8px;
-			background: #2563eb;
-			color: white;
-			font-size: 16px;
-		}
+.tabs{
+    display:flex;
+    gap:10px;
+    margin-bottom:15px;
+}
 
-		.result {
-			background: #eef5ff;
-			padding: 15px;
-			border-radius: 10px;
-			margin-top: 15px;
-			border-left: 5px solid #2563eb;
-		}
+.tab{
+    flex:1;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    font-size:16px;
+    font-weight:bold;
+    background:#dbeafe;
+    color:#1e3a8a;
+}
 
-		.tabs {
-			display: flex;
-			gap: 10px;
-			margin-bottom: 15px;
-		}
+.tab.active{
+    background:#2563eb;
+    color:white;
+}
 
-		.tab {
-			flex: 1;
-			padding: 12px;
-			border: none;
-			border-radius: 10px;
-			font-size: 16px;
-			font-weight: bold;
-			background: #dbeafe;
-			color: #1e3a8a;
-		}
+.page{
+    display:none;
+}
 
-		.tab.active {
-			background: #2563eb;
-			color: white;
-		}
+.page.active{
+    display:block;
+}
 
-		.page {
-			display: none;
-		}
+hr{
+    border:none;
+    border-top:1px solid #ccc;
+    margin:15px 0;
+}
 
-		.page.active {
-			display: block;
-		}
-	</style>
+</style>
 </head>
+
 
 <body>
 
-	<div class="tabs">
 
-		<button id="btnPesin" class="tab active" onclick="showPage('pesin')">
+<div class="tabs">
 
-			Peşin İskonto
+<button
+id="btnPesin"
+class="tab active"
+onclick="showPage('pesin')">
 
-		</button>
+Peşin İskonto
 
-		<button id="btnCek" class="tab" onclick="showPage('cek')">
-
-			Çek İskonto
-
-		</button>
+</button>
 
 
-	</div>
+<button
+id="btnCek"
+class="tab"
+onclick="showPage('cek')">
+
+Çek İskonto
+
+</button>
+
+</div>
 
 
-	<div id="pesin" class="page active">
 
-		<div class="card">
+<!-- ========================= -->
+<!-- PEŞİN İSKONTO -->
+<!-- ========================= -->
+
+<div id="pesin" class="page active">
+
+<div class="card">
+
+<h2>Peşin İskonto</h2>
 
 
-			<h2>Peşin İskonto</h2>
+<input
+id="tutar"
+inputmode="decimal"
+placeholder="İşlem Tutarı">
 
-			<input id="tutar" inputmode="decimal" placeholder="İşlem Tutarı">
+
+<input
+id="faiz"
+inputmode="decimal"
+placeholder="Faiz Oranı %">
 
 
-			<input id="faiz" inputmode="decimal" placeholder="Faiz Oranı %">
+<input
+id="komisyon"
+inputmode="decimal"
+placeholder="Komisyon Oranı %">
 
-			<input id="komisyon" inputmode="decimal" placeholder="Komisyon Oranı %">
 
-			<input id="masraf" inputmode="decimal" placeholder="Masraf">
+<input
+id="masraf"
+inputmode="decimal"
+placeholder="Masraf">
 
-			<input id="vade" inputmode="decimal" placeholder="Vade Gün">
 
-			<button onclick="hesapla()">
-				HESAPLA
-			</button>
+<input
+id="vade"
+inputmode="decimal"
+placeholder="Vade Gün">
 
-			<button onclick="temizle()">
-				TEMİZLE
-			</button>
 
-			<div id="sonuc" class="result">
+<button onclick="hesapla()">
+HESAPLA
+</button>
 
-				Hesaplama sonucu burada görüntülenecektir.
 
-			</div>
+<button onclick="temizle()">
+TEMİZLE
+</button>
 
-		</div>
 
-	</div>
+<div id="sonuc" class="result">
 
-	<!-- BURAYA ÇEK SAYFASI GELECEK -->
+Hesaplama sonucu burada görüntülenecektir.
 
-	<div id="cek" class="page">
+</div>
 
-		<div class="card">
+</div>
 
-			<h2>Çek İskonto</h2>
+</div>
 
-			<input id="cekFaiz" inputmode="decimal" oninput="listeGuncelle()" placeholder="Faiz Oranı %">
 
-			<input id="cekKomisyon" inputmode="decimal" oninput="listeGuncelle()" placeholder="Komisyon Oranı %">
 
-			<input id="cekMasraf" inputmode="decimal" oninput="listeGuncelle()" placeholder="Masraf">
+<!-- ========================= -->
+<!-- ÇEK İSKONTO -->
+<!-- ========================= -->
 
-			<div class="result">
+<div id="cek" class="page">
 
-				<b>ÇEK GİRİŞİ</b>
+<div class="card">
 
-			</div>
-			<label><b>Çek Tutarı</b></label>
+<h2>Çek İskonto</h2>
 
-			<input id="cekTutar" inputmode="decimal">
 
-			<label><b>📅 Vade Tarihi</b></label>
+<input
+id="cekFaiz"
+inputmode="decimal"
+oninput="listeGuncelle()"
+placeholder="Faiz Oranı %">
 
-			<input id="cekTarih" type="date" style="
+
+<input
+id="cekKomisyon"
+inputmode="decimal"
+oninput="listeGuncelle()"
+placeholder="Komisyon Oranı %">
+
+
+<input
+id="cekMasraf"
+inputmode="decimal"
+oninput="listeGuncelle()"
+placeholder="Masraf">
+
+
+<div class="result">
+
+<b>ÇEK GİRİŞİ</b>
+
+</div>
+
+
+<label><b>Çek Tutarı</b></label>
+
+<input
+id="cekTutar"
+inputmode="decimal"
+placeholder="Çek Tutarı">
+
+
+<label><b>📅 Vade Tarihi</b></label>
+
+<input
+id="cekTarih"
+type="date"
+style="
 font-size:18px;
 font-weight:bold;
 background:white;
 ">
 
 
+<button onclick="cekEkle()">
+ÇEK EKLE
+</button>
 
-			<button onclick="cekEkle()">
-				ÇEK EKLE
-			</button>
 
-			<div id="cekOzet" class="result">
 
-				Toplam Çek Tutarı: 0,00 TL
+<div id="cekOzet" class="result">
 
-				<br><br>
+Toplam Çek Tutarı: 0,00 TL
 
-				Ortalama Vade: 0 Gün
+<br><br>
 
-			</div>
+Ağırlıklı Ortalama Vade: 0 Gün
 
+</div>
 
-			<div id="cekListe" class="result">
 
-				Çek listesi burada görüntülenecektir.
 
-			</div>
+<div id="cekListe" class="result">
 
-			<div id="cekSonuc" class="result">
+Çek listesi burada görüntülenecektir.
 
-				Hesaplama sonucu burada görüntülenecektir.
+</div>
 
-			</div>
 
-		</div>
 
-	</div>
+<div id="cekSonuc" class="result">
 
+Hesaplama sonucu burada görüntülenecektir.
 
-	<script>
-		let cekler = [];
+</div>
 
+</div>
 
-		const tatiller = [
+</div>
 
-			"2026-01-01",
-			"2026-03-20",
-			"2026-03-21",
-			"2026-03-22",
-			"2026-03-23",
-			"2026-04-23",
-			"2026-05-01",
-			"2026-05-19",
-			"2026-05-26",
-			"2026-05-27",
-			"2026-05-28",
-			"2026-05-29",
-			"2026-05-30",
-			"2026-07-15",
-			"2026-08-30",
-			"2026-10-28",
-			"2026-10-29",
 
-			"2027-01-01",
-			"2027-03-08",
-			"2027-03-09",
-			"2027-03-10",
-			"2027-05-01",
-			"2027-05-16",
-			"2027-05-17",
-			"2027-05-18",
-			"2027-05-19",
-			"2027-07-15",
-			"2027-08-30",
-			"2027-10-28",
-			"2027-10-29",
-			"2028-01-01",
 
-			"2028-02-25",
-			"2028-02-26",
-			"2028-02-27",
-			"2028-02-28",
+<script>
 
-			"2028-04-23",
 
-			"2028-05-01",
+/* ==================================================
+   ÇEK LİSTESİ
+================================================== */
 
-			"2028-05-04",
-			"2028-05-05",
-			"2028-05-06",
-			"2028-05-07",
-			"2028-05-08",
+let cekler = [];
 
-			"2028-05-19",
 
-			"2028-07-15",
 
-			"2028-08-30",
+/* ==================================================
+   RESMİ TATİLLER
+================================================== */
 
-			"2028-10-28",
-			"2028-10-29"
+const tatiller = [
 
-		];
+"2026-01-01",
 
-		function isIsGunu(tarih) {
+"2026-03-20",
+"2026-03-21",
+"2026-03-22",
+"2026-03-23",
 
-			let gun = tarih.getDay();
+"2026-04-23",
 
-			let tarihStr =
-				tarih.toISOString().split("T")[0];
+"2026-05-01",
+"2026-05-19",
 
-			return (
-				gun !== 0 &&
-				gun !== 6 &&
-				!tatiller.includes(tarihStr)
-			);
+"2026-05-26",
+"2026-05-27",
+"2026-05-28",
+"2026-05-29",
+"2026-05-30",
 
-		}
+"2026-07-15",
 
-		function isGunuEkle(tarih, adet) {
+"2026-08-30",
 
-			let sonuc = new Date(tarih);
+"2026-10-28",
+"2026-10-29",
 
-			while (adet > 0) {
 
-				sonuc.setDate(
-					sonuc.getDate() + 1
-				);
+"2027-01-01",
 
-				if (isIsGunu(sonuc)) {
-					adet--;
-				}
+"2027-03-08",
+"2027-03-09",
+"2027-03-10",
 
-			}
+"2027-05-01",
 
-			return sonuc;
+"2027-05-16",
+"2027-05-17",
+"2027-05-18",
+"2027-05-19",
 
-		}
+"2027-07-15",
 
+"2027-08-30",
 
-		function tl(x) {
+"2027-10-28",
+"2027-10-29",
 
-			return x.toLocaleString(
-				"tr-TR", {
-					minimumFractionDigits: 2,
-					maximumFractionDigits: 2
-				}
-			);
 
-		}
+"2028-01-01",
 
-		function hesapla() {
+"2028-02-25",
+"2028-02-26",
+"2028-02-27",
+"2028-02-28",
 
-			if (
-				!document.getElementById("tutar").value ||
-				!document.getElementById("faiz").value ||
-				!document.getElementById("komisyon").value ||
-				!document.getElementById("masraf").value ||
-				!document.getElementById("vade").value
-			) {
+"2028-04-23",
 
-				alert("Lütfen tüm alanları doldurunuz.");
-				return;
+"2028-05-01",
 
-			}
+"2028-05-04",
+"2028-05-05",
+"2028-05-06",
+"2028-05-07",
+"2028-05-08",
 
-			let tutar =
-				parseFloat(
-					document.getElementById("tutar").value
-				) || 0;
+"2028-05-19",
 
-			let faiz =
-				parseFloat(
-					document.getElementById("faiz").value
-					.replace(",", ".")
-				) || 0;
+"2028-07-15",
 
+"2028-08-30",
 
-			let komisyon =
-				parseFloat(
-					document.getElementById("komisyon").value
-					.replace(",", ".")
-				) || 0;
+"2028-10-28",
+"2028-10-29"
 
-			let masraf =
-				parseFloat(
-					document.getElementById("masraf").value
-					.replace(",", ".")
-				) || 0;
+];
 
 
-			let vade =
-				parseFloat(
-					document.getElementById("vade").value
-				) || 0;
 
-			let faizTutari =
-				(tutar * faiz * vade) / 36000;
+/* ==================================================
+   TARİH OLUŞTUR
+================================================== */
 
-			let komisyonTutari =
-				(tutar * komisyon) / 100;
+function tarihOlustur(tarih){
 
-			let bsmv =
-				(faizTutari +
-					komisyonTutari +
-					masraf) * 0.05;
+    let p = tarih.split("-");
 
-			let toplamKesinti =
-				faizTutari +
-				komisyonTutari +
-				masraf +
-				bsmv;
+    return new Date(
+        Number(p[0]),
+        Number(p[1])-1,
+        Number(p[2])
+    );
 
-			let netOdeme =
-				tutar - toplamKesinti;
+}
 
-			let basitOran = 0;
-			let katkiliOran = 0;
 
-			if (netOdeme > 0 && vade > 0) {
 
-				katkiliOran =
-					(
-						(faiz + ((360 / vade) * komisyon)) *
-						tutar /
-						netOdeme
-					);
+/* ==================================================
+   TARİH STRING
+================================================== */
 
-			}
+function tarihString(tarih){
 
-			if (vade > 0 && tutar > 0) {
+    let yil =
+        tarih.getFullYear();
 
-				basitOran =
-					(
-						(toplamKesinti / 1.05) *
-						36000 /
-						tutar /
-						vade
-					);
+    let ay =
+        String(
+            tarih.getMonth()+1
+        ).padStart(2,"0");
 
-			}
+    let gun =
+        String(
+            tarih.getDate()
+        ).padStart(2,"0");
 
-			let getiri = 0;
+    return yil+"-"+ay+"-"+gun;
 
-			if (vade > 0) {
+}
 
-				getiri =
-					(
-						(
-							(faizTutari + komisyonTutari + masraf) *
-							36000
-						) /
-						(
-							(
-								((tutar - netOdeme) / 1.05) *
-								0.05 +
-								netOdeme
-							) *
-							vade
-						)
-					);
 
-			}
 
-			document.getElementById("sonuc").innerHTML =
-				`
+/* ==================================================
+   İŞ GÜNÜ MÜ?
+================================================== */
+
+function isIsGunu(tarih){
+
+    let gun =
+        tarih.getDay();
+
+    let str =
+        tarihString(tarih);
+
+    return (
+        gun !== 0 &&
+        gun !== 6 &&
+        !tatiller.includes(str)
+    );
+
+}
+
+
+
+/* ==================================================
+   EXCEL İŞGÜNÜ
+==================================================
+
+Excel:
+
+İŞGÜNÜ(tarih;1;tatiller)
+
+================================================== */
+
+function excelIsGunu(tarih, adet){
+
+    let sonuc =
+        new Date(
+            tarih.getFullYear(),
+            tarih.getMonth(),
+            tarih.getDate()
+        );
+
+
+    if(adet > 0){
+
+        /*
+        Excel İŞGÜNÜ:
+        Başlangıç tarihinden sonraki
+        iş günlerini sayar.
+        */
+
+        while(adet > 0){
+
+            sonuc.setDate(
+                sonuc.getDate()+1
+            );
+
+            if(isIsGunu(sonuc)){
+
+                adet--;
+
+            }
+
+        }
+
+    }
+
+
+    if(adet < 0){
+
+        while(adet < 0){
+
+            sonuc.setDate(
+                sonuc.getDate()-1
+            );
+
+            if(isIsGunu(sonuc)){
+
+                adet++;
+
+            }
+
+        }
+
+    }
+
+
+    return sonuc;
+
+}
+
+
+
+/* ==================================================
+   ANA VADE HESABI
+==================================================
+
+EXCEL FORMÜLÜ:
+
+=EĞER(
+ K4=0;
+ 0;
+ İŞGÜNÜ(
+   İŞGÜNÜ(K4-1;1;N4:N36);
+   1;
+   N4:N36
+ )
+ +1
+ -BUGÜN()
+)
+
+================================================== */
+
+function vadeHesapla(vadeTarihi){
+
+
+    /*
+    K4 - 1
+    */
+
+    let birGunOnce =
+        new Date(
+            vadeTarihi.getFullYear(),
+            vadeTarihi.getMonth(),
+            vadeTarihi.getDate()
+        );
+
+    birGunOnce.setDate(
+        birGunOnce.getDate()-1
+    );
+
+
+    /*
+    İŞGÜNÜ(K4-1;1;N4:N36)
+    */
+
+    let ilkIsGunu =
+        excelIsGunu(
+            birGunOnce,
+            1
+        );
+
+
+    /*
+    İŞGÜNÜ(ilk sonuç;1;N4:N36)
+    */
+
+    let ikinciIsGunu =
+        excelIsGunu(
+            ilkIsGunu,
+            1
+        );
+
+
+    /*
+    BUGÜN()
+    */
+
+    let bugun =
+        new Date();
+
+    bugun =
+        new Date(
+            bugun.getFullYear(),
+            bugun.getMonth(),
+            bugun.getDate()
+        );
+
+
+    /*
+    Excel:
+    
+    sonuç + 1 - BUGÜN()
+
+    */
+
+    let fark =
+        Math.round(
+            (
+                ikinciIsGunu -
+                bugun
+            )
+            /
+            86400000
+        );
+
+
+    return fark + 1;
+
+}
+
+
+
+/* ==================================================
+   TL FORMAT
+================================================== */
+
+function tl(x){
+
+    return x.toLocaleString(
+        "tr-TR",
+        {
+            minimumFractionDigits:2,
+            maximumFractionDigits:2
+        }
+    );
+
+}
+
+
+
+/* ==================================================
+   PEŞİN HESAP
+================================================== */
+
+function hesapla(){
+
+    let tutar =
+        parseFloat(
+            document.getElementById("tutar")
+            .value
+            .replace(/\./g,"")
+            .replace(",",".")
+        ) || 0;
+
+
+    let faiz =
+        parseFloat(
+            document.getElementById("faiz")
+            .value
+            .replace(",",".")
+        ) || 0;
+
+
+    let komisyon =
+        parseFloat(
+            document.getElementById("komisyon")
+            .value
+            .replace(",",".")
+        ) || 0;
+
+
+    let masraf =
+        parseFloat(
+            document.getElementById("masraf")
+            .value
+            .replace(",",".")
+        ) || 0;
+
+
+    let vade =
+        parseFloat(
+            document.getElementById("vade")
+            .value
+            .replace(",",".")
+        ) || 0;
+
+
+    if(
+        tutar <= 0 ||
+        faiz < 0 ||
+        komisyon < 0 ||
+        vade <= 0
+    ){
+
+        alert(
+            "Lütfen tüm alanları doğru giriniz."
+        );
+
+        return;
+
+    }
+
+
+    let faizTutari =
+        (
+            tutar *
+            faiz *
+            vade
+        ) / 36000;
+
+
+    let komisyonTutari =
+        (
+            tutar *
+            komisyon
+        ) / 100;
+
+
+    let bsmv =
+        (
+            faizTutari +
+            komisyonTutari +
+            masraf
+        ) * 0.05;
+
+
+    let toplamKesinti =
+        faizTutari +
+        komisyonTutari +
+        masraf +
+        bsmv;
+
+
+    let netOdeme =
+        tutar -
+        toplamKesinti;
+
+
+    let basitOran =
+        (
+            (toplamKesinti/1.05) *
+            36000 /
+            tutar /
+            vade
+        );
+
+
+    let katkiliOran = 0;
+
+
+    if(netOdeme > 0){
+
+        katkiliOran =
+            (
+                (
+                    faiz +
+                    (
+                        (360/vade) *
+                        komisyon
+                    )
+                )
+                *
+                tutar /
+                netOdeme
+            );
+
+    }
+
+
+    let getiri = 0;
+
+
+    if(vade > 0){
+
+        getiri =
+            (
+                (
+                    faizTutari +
+                    komisyonTutari +
+                    masraf
+                )
+                *
+                36000
+            )
+            /
+            (
+                (
+                    (
+                        (tutar-netOdeme)/1.05
+                    )
+                    *
+                    0.05
+                    +
+                    netOdeme
+                )
+                *
+                vade
+            );
+
+    }
+
+
+    document.getElementById("sonuc")
+    .innerHTML = `
 
 <b>Faiz Tutarı:</b>
 ${tl(faizTutari)}
@@ -487,128 +837,239 @@ ${tl(netOdeme)}
 
 `;
 
-		}
-
-		function temizle() {
-
-			document.getElementById("tutar").value = "";
-			document.getElementById("faiz").value = "";
-			document.getElementById("komisyon").value = "";
-			document.getElementById("masraf").value = "";
-			document.getElementById("vade").value = "";
-
-			document.getElementById("sonuc").innerHTML =
-				"Hesaplama sonucu burada görünecektir.";
-
-		}
-
-		function showPage(page) {
-
-			document.getElementById("pesin").classList.remove("active");
-			document.getElementById("cek").classList.remove("active");
-
-			document.getElementById("btnPesin").classList.remove("active");
-			document.getElementById("btnCek").classList.remove("active");
-
-			if (page == "pesin") {
-
-				document.getElementById("pesin").classList.add("active");
-				document.getElementById("btnPesin").classList.add("active");
-
-			} else {
-
-				document.getElementById("cek").classList.add("active");
-				document.getElementById("btnCek").classList.add("active");
-
-			}
-
-		}
-
-		function cekEkle() {
-
-			let tutar =
-				parseFloat(
-					document.getElementById("cekTutar").value
-					.replace(",", ".")
-				) || 0;
-
-			let tarih =
-				document.getElementById("cekTarih").value;
-
-			if (tutar <= 0 || !tarih) {
-
-				alert("Çek tutarı ve tarih giriniz.");
-				return;
-
-			}
-
-			let vadeTarihi = new Date(tarih);
-
-			let valorluVade =
-				isGunuEkle(
-					vadeTarihi,
-					1
-				);
-
-			let bugun = new Date();
-			bugun = new Date(
-				bugun.getFullYear(),
-				bugun.getMonth(),
-				bugun.getDate()
-			);
-
-			let gun =
-				Math.ceil(
-					(valorluVade - bugun) /
-					(1000 * 60 * 60 * 24)
-				) + 1;
+}
 
 
 
+/* ==================================================
+   TEMİZLE
+================================================== */
 
-			cekler.push({
-				tutar: tutar,
-				gun: gun,
-				tarih: tarih
-			});
+function temizle(){
 
-			cekler.sort(function(a, b) {
+    document.getElementById("tutar").value="";
+    document.getElementById("faiz").value="";
+    document.getElementById("komisyon").value="";
+    document.getElementById("masraf").value="";
+    document.getElementById("vade").value="";
 
-				return new Date(a.tarih) - new Date(b.tarih);
+    document.getElementById("sonuc")
+    .innerHTML =
+        "Hesaplama sonucu burada görünecektir.";
+
+}
 
 
-			});
+
+/* ==================================================
+   SAYFA
+================================================== */
+
+function showPage(page){
+
+    document
+    .getElementById("pesin")
+    .classList
+    .remove("active");
+
+    document
+    .getElementById("cek")
+    .classList
+    .remove("active");
+
+    document
+    .getElementById("btnPesin")
+    .classList
+    .remove("active");
+
+    document
+    .getElementById("btnCek")
+    .classList
+    .remove("active");
 
 
-			listeGuncelle();
+    if(page === "pesin"){
 
-			document.getElementById("cekTutar").value = "";
-			document.getElementById("cekTarih").value = "";
+        document
+        .getElementById("pesin")
+        .classList
+        .add("active");
 
-		}
+        document
+        .getElementById("btnPesin")
+        .classList
+        .add("active");
 
-		function listeGuncelle() {
+    }
 
-			let html = "";
+    else{
 
-			let toplamTutar = 0;
-			let toplamVadeCarpim = 0;
+        document
+        .getElementById("cek")
+        .classList
+        .add("active");
 
-			for (let i = 0; i < cekler.length; i++) {
+        document
+        .getElementById("btnCek")
+        .classList
+        .add("active");
 
-				toplamTutar += cekler[i].tutar;
+    }
 
-				toplamVadeCarpim +=
-					cekler[i].tutar * cekler[i].gun;
+}
 
-				html += `
-<b>${i+1}. Çek</b><br>
 
-${tl(cekler[i].tutar)} TL<br>
 
-${new Date(cekler[i].tarih)
-.toLocaleDateString("tr-TR")}<br>
+/* ==================================================
+   ÇEK EKLE
+================================================== */
 
+function cekEkle(){
+
+    let tutar =
+        parseFloat(
+            document.getElementById("cekTutar")
+            .value
+            .replace(/\./g,"")
+            .replace(",",".")
+        ) || 0;
+
+
+    let tarih =
+        document
+        .getElementById("cekTarih")
+        .value;
+
+
+    if(
+        tutar <= 0 ||
+        !tarih
+    ){
+
+        alert(
+            "Çek tutarı ve tarih giriniz."
+        );
+
+        return;
+
+    }
+
+
+    /*
+    Vade tarihini oluştur
+    */
+
+    let vadeTarihi =
+        tarihOlustur(tarih);
+
+
+    /*
+    TEK VADE HESABI
+    */
+
+    let gun =
+        vadeHesapla(
+            vadeTarihi
+        );
+
+
+    /*
+    ÇEKİ KAYDET
+    */
+
+    cekler.push({
+
+        tutar:tutar,
+
+        tarih:tarih,
+
+        gun:gun
+
+    });
+
+
+    /*
+    TARİHE GÖRE SIRALA
+    */
+
+    cekler.sort(
+        function(a,b){
+
+            return (
+                tarihOlustur(a.tarih) -
+                tarihOlustur(b.tarih)
+            );
+
+        }
+    );
+
+
+    listeGuncelle();
+
+
+    /*
+    ALANLARI TEMİZLE
+    */
+
+    document
+    .getElementById("cekTutar")
+    .value="";
+
+    document
+    .getElementById("cekTarih")
+    .value="";
+
+}
+
+
+
+/* ==================================================
+   ÇEK LİSTESİ
+================================================== */
+
+function listeGuncelle(){
+
+    let html="";
+
+    let toplamTutar=0;
+
+    let toplamVadeCarpim=0;
+
+
+    for(
+        let i=0;
+        i<cekler.length;
+        i++
+    ){
+
+        toplamTutar +=
+            cekler[i].tutar;
+
+
+        toplamVadeCarpim +=
+            cekler[i].tutar *
+            cekler[i].gun;
+
+
+        html += `
+
+<b>${i+1}. Çek</b>
+
+<br><br>
+
+<b>Tutar:</b>
+${tl(cekler[i].tutar)} TL
+
+<br>
+
+<b>Vade Tarihi:</b>
+${tarihOlustur(
+    cekler[i].tarih
+).toLocaleDateString("tr-TR")}
+
+<br>
+
+<b>Vade:</b>
 ${cekler[i].gun} Gün
 
 <br><br>
@@ -618,24 +1079,31 @@ SİL
 </button>
 
 <hr>
+
 `;
 
-			}
+    }
 
 
-			let ortalamaVade = 0;
+    let ortalamaVade=0;
 
-			if (toplamTutar > 0) {
 
-				ortalamaVade =
-					toplamVadeCarpim / toplamTutar;
+    if(toplamTutar>0){
 
-			}
+        ortalamaVade =
+            toplamVadeCarpim /
+            toplamTutar;
 
-			document.getElementById("cekOzet").innerHTML =
-				`
+    }
+
+
+    document
+    .getElementById("cekOzet")
+    .innerHTML = `
 
 <b>Toplam Çek Tutarı:</b>
+
+<br>
 
 ${tl(toplamTutar)} TL
 
@@ -643,100 +1111,177 @@ ${tl(toplamTutar)} TL
 
 <b>Ağırlıklı Ortalama Vade:</b>
 
+<br>
+
 ${ortalamaVade.toFixed(0)} Gün
 
 `;
 
-			document.getElementById("cekListe").innerHTML =
-				html || "Çek listesi burada görüntülenecektir.";
-			let faiz =
-				parseFloat(
-					document.getElementById("cekFaiz").value
-					.replace(",", ".")
-				) || 0;
-
-			let komisyon =
-				parseFloat(
-					document.getElementById("cekKomisyon").value
-					.replace(",", ".")
-				) || 0;
-
-			let masraf =
-				parseFloat(
-					document.getElementById("cekMasraf").value
-					.replace(",", ".")
-				) || 0;
-
-			let faizTutari =
-				(toplamTutar * faiz * ortalamaVade) / 36000;
-
-			let komisyonTutari =
-				(toplamTutar * komisyon) / 100;
-
-			let bsmv =
-				(faizTutari + komisyonTutari + masraf) * 0.05;
-
-			let toplamKesinti =
-				faizTutari +
-				komisyonTutari +
-				masraf +
-				bsmv;
-
-			let netOdeme =
-				toplamTutar - toplamKesinti;
-
-			let basitOran = 0;
-
-			if (ortalamaVade > 0 && toplamTutar > 0) {
-
-				basitOran =
-					(
-						(toplamKesinti / 1.05) *
-						36000 /
-						toplamTutar /
-						ortalamaVade
-					);
-
-			}
-
-			let katkiliOran = 0;
-
-			if (netOdeme > 0 && ortalamaVade > 0) {
-
-				katkiliOran =
-					(
-						(faiz + ((360 / ortalamaVade) * komisyon)) *
-						toplamTutar /
-						netOdeme
-					);
-
-			}
-
-			let getiri = 0;
-
-			if (ortalamaVade > 0) {
-
-				getiri =
-					(
-						(
-							(faizTutari + komisyonTutari + masraf) *
-							36000
-						) /
-						(
-							(
-								((toplamTutar - netOdeme) / 1.05) *
-								0.05 +
-								netOdeme
-							) *
-							ortalamaVade
-						)
-					);
-
-			}
 
 
-			document.getElementById("cekSonuc").innerHTML =
-				`
+    document
+    .getElementById("cekListe")
+    .innerHTML =
+        html ||
+        "Çek listesi burada görüntülenecektir.";
+
+
+
+    /*
+    ============================
+    İSKONTO HESABI
+    ============================
+    */
+
+    let faiz =
+        parseFloat(
+            document
+            .getElementById("cekFaiz")
+            .value
+            .replace(",",".")
+        ) || 0;
+
+
+    let komisyon =
+        parseFloat(
+            document
+            .getElementById("cekKomisyon")
+            .value
+            .replace(",",".")
+        ) || 0;
+
+
+    let masraf =
+        parseFloat(
+            document
+            .getElementById("cekMasraf")
+            .value
+            .replace(",",".")
+        ) || 0;
+
+
+    let faizTutari =
+        (
+            toplamTutar *
+            faiz *
+            ortalamaVade
+        ) / 36000;
+
+
+    let komisyonTutari =
+        (
+            toplamTutar *
+            komisyon
+        ) / 100;
+
+
+    let bsmv =
+        (
+            faizTutari +
+            komisyonTutari +
+            masraf
+        ) * 0.05;
+
+
+    let toplamKesinti =
+        faizTutari +
+        komisyonTutari +
+        masraf +
+        bsmv;
+
+
+    let netOdeme =
+        toplamTutar -
+        toplamKesinti;
+
+
+    let basitOran=0;
+
+
+    if(
+        ortalamaVade>0 &&
+        toplamTutar>0
+    ){
+
+        basitOran =
+            (
+                (toplamKesinti/1.05)
+                *
+                36000
+                /
+                toplamTutar
+                /
+                ortalamaVade
+            );
+
+    }
+
+
+    let katkiliOran=0;
+
+
+    if(
+        netOdeme>0 &&
+        ortalamaVade>0
+    ){
+
+        katkiliOran =
+            (
+                (
+                    faiz +
+                    (
+                        (360/ortalamaVade)
+                        *
+                        komisyon
+                    )
+                )
+                *
+                toplamTutar
+                /
+                netOdeme
+            );
+
+    }
+
+
+    let getiri=0;
+
+
+    if(ortalamaVade>0){
+
+        getiri =
+            (
+                (
+                    faizTutari +
+                    komisyonTutari +
+                    masraf
+                )
+                *
+                36000
+            )
+            /
+            (
+                (
+                    (
+                        (toplamTutar-netOdeme)
+                        /
+                        1.05
+                    )
+                    *
+                    0.05
+                    +
+                    netOdeme
+                )
+                *
+                ortalamaVade
+            );
+
+    }
+
+
+    document
+    .getElementById("cekSonuc")
+    .innerHTML = `
 
 <b>Faiz Tutarı:</b>
 ${tl(faizTutari)}
@@ -778,18 +1323,27 @@ ${tl(netOdeme)}
 
 `;
 
+}
 
-		}
 
-		function cekSil(index) {
 
-			cekler.splice(index, 1);
+/* ==================================================
+   ÇEK SİL
+================================================== */
 
-			listeGuncelle();
+function cekSil(index){
 
-		}
-	</script>
+    cekler.splice(
+        index,
+        1
+    );
+
+    listeGuncelle();
+
+}
+
+
+</script>
 
 </body>
-
 </html>
