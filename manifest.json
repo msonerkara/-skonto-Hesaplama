@@ -1,1 +1,18 @@
 
+{
+  "name": "İskonto Pro V4",
+  "short_name": "İskonto Pro",
+  "description": "Peşin iskonto ve çek iskonto hesaplama uygulaması",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f4f6fa",
+  "theme_color": "#2563eb",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
