@@ -536,21 +536,20 @@ EXCEL FORMÜLÜ:
 
 function vadeHesapla(vadeTarihi){
 
-    // 2 takvim günü ekle
     let valor = new Date(
         vadeTarihi.getFullYear(),
         vadeTarihi.getMonth(),
         vadeTarihi.getDate()
     );
 
-    valor.setDate(valor.getDate() + 2);
+    // +1 gün
+    valor.setDate(valor.getDate() + 1);
 
-    // Tatil veya hafta sonuysa ileri taşı
+    // iş gününe yuvarla
     while(!isIsGunu(valor)){
         valor.setDate(valor.getDate() + 1);
     }
 
-    // Bugün
     let bugun = new Date();
 
     bugun = new Date(
@@ -559,13 +558,10 @@ function vadeHesapla(vadeTarihi){
         bugun.getDate()
     );
 
-    // Gün farkı
-    return Math.round(
+    return Math.floor(
         (valor - bugun) / 86400000
     );
 }
-
-
 
 /* ==================================================
    TL FORMAT
