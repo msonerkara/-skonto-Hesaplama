@@ -1,16 +1,17 @@
 
 {
-  "name": "İskonto Pro V4",
-  "short_name": "İskonto Pro",
-  "description": "Peşin iskonto ve çek iskonto hesaplama uygulaması",
-  "start_url": "./",
+  "name": "Iskonto Pro V4",
+  "short_name": "Iskonto Pro",
+  "description": "Pesin iskonto ve cek iskonto hesaplama uygulamasi",
+  "start_url": "/-skonto-Hesaplama/",
+  "scope": "/-skonto-Hesaplama/",
   "display": "standalone",
   "background_color": "#f4f6fa",
   "theme_color": "#2563eb",
   "orientation": "portrait",
   "icons": [
     {
-      "src": "İkon-512.png",
+      "src": "https://msonerkara.github.io/-skonto-Hesaplama/İkon-512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
