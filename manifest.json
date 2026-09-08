@@ -1,19 +1,11 @@
-
 {
   "name": "Iskonto Pro V4",
   "short_name": "Iskonto Pro",
   "description": "Pesin iskonto ve cek iskonto hesaplama uygulamasi",
-  "start_url": "/-skonto-Hesaplama/",
-  "scope": "/-skonto-Hesaplama/",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#f4f6fa",
   "theme_color": "#2563eb",
-  "orientation": "portrait",
-  "icons": [
-    {
-      "src": "icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ]
+  "orientation": "portrait"
 }
+
