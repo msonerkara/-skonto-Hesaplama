@@ -536,52 +536,34 @@ EXCEL FORMÜLÜ:
 
 function vadeHesapla(vadeTarihi){
 
-    // 1 gün ekle
-    let valor = new Date(
-        vadeTarihi.getFullYear(),
-        vadeTarihi.getMonth(),
-        vadeTarihi.getDate()
-    );
-
-    valor.setDate(valor.getDate() + 1);
+    // Vadeden sonraki ilk iş günü
+    let valor = excelIsGunu(vadeTarihi, 1);
 
     // Valörün ertesi günü
-    let ertesiGun = new Date(
-        valor.getFullYear(),
-        valor.getMonth(),
-        valor.getDate()
-    );
-
+    let ertesiGun = new Date(valor);
     ertesiGun.setDate(ertesiGun.getDate() + 1);
 
-    // Ertesi gün tatil/hafta sonu ise
-    // valörü ilk iş gününe taşı
+    // Ertesi gün tatilse valörü ileri taşı
     if (!isIsGunu(ertesiGun)) {
 
-        while (!isIsGunu(valor)) {
+        do {
             valor.setDate(valor.getDate() + 1);
         }
+        while (!isIsGunu(valor));
 
-        while (!isIsGunu(ertesiGun)) {
-            ertesiGun.setDate(ertesiGun.getDate() + 1);
-        }
-
-        valor = ertesiGun;
     }
 
-    // Bugün
-    let bugun = new Date();
-
-    bugun = new Date(
-        bugun.getFullYear(),
-        bugun.getMonth(),
-        bugun.getDate()
+    let bugun = new Date(
+        new Date().getFullYear(),
+        new Date().getMonth(),
+        new Date().getDate()
     );
 
     return Math.floor(
         (valor - bugun) / 86400000
     );
 }
+
 
 
 /* ==================================================
