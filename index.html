@@ -536,20 +536,40 @@ EXCEL FORMÜLÜ:
 
 function vadeHesapla(vadeTarihi){
 
+    // 1 gün ekle
     let valor = new Date(
         vadeTarihi.getFullYear(),
         vadeTarihi.getMonth(),
         vadeTarihi.getDate()
     );
 
-    // +1 gün
     valor.setDate(valor.getDate() + 1);
 
-    // iş gününe yuvarla
-    while(!isIsGunu(valor)){
-        valor.setDate(valor.getDate() + 1);
+    // Valörün ertesi günü
+    let ertesiGun = new Date(
+        valor.getFullYear(),
+        valor.getMonth(),
+        valor.getDate()
+    );
+
+    ertesiGun.setDate(ertesiGun.getDate() + 1);
+
+    // Ertesi gün tatil/hafta sonu ise
+    // valörü ilk iş gününe taşı
+    if (!isIsGunu(ertesiGun)) {
+
+        while (!isIsGunu(valor)) {
+            valor.setDate(valor.getDate() + 1);
+        }
+
+        while (!isIsGunu(ertesiGun)) {
+            ertesiGun.setDate(ertesiGun.getDate() + 1);
+        }
+
+        valor = ertesiGun;
     }
 
+    // Bugün
     let bugun = new Date();
 
     bugun = new Date(
@@ -562,6 +582,7 @@ function vadeHesapla(vadeTarihi){
         (valor - bugun) / 86400000
     );
 }
+
 
 /* ==================================================
    TL FORMAT
