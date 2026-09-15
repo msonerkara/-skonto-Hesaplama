@@ -956,6 +956,26 @@ function cekEkle(){
         document
         .getElementById("cekTarih")
         .value;
+let bugun = new Date();
+
+bugun = new Date(
+    bugun.getFullYear(),
+    bugun.getMonth(),
+    bugun.getDate()
+);
+
+let secilenTarih =
+    tarihOlustur(tarih);
+
+if(secilenTarih < bugun){
+
+    alert(
+        "Bugünden önceki tarihli çek girilemez."
+    );
+
+    return;
+
+}
 
 
     if(
