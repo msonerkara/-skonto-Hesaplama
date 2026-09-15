@@ -588,7 +588,8 @@ function vadeHesapla(vadeTarihi){
 
     // 1 iş günü ekle
     let valor =
-        excelIsGunu(reelVade, 1);
+    new Date(reelVade);
+
 
     // valörün ertesi günü
     let ertesiGun =
@@ -598,21 +599,30 @@ function vadeHesapla(vadeTarihi){
         ertesiGun.getDate() + 1
     );
 
-    let vadeTatildi = !isIsGunu(vadeTarihi);
+    let vadeTatildi =
+    !isIsGunu(vadeTarihi);
 
-// Sadece vade tatilse bu kontrol çalışsın
-if(
-    vadeTatildi &&
-    !isIsGunu(ertesiGun)
-){
+if(vadeTatildi){
 
-    valor =
-        excelIsGunu(
-            valor,
-            1
-        );
+    let ertesiGun =
+        new Date(reelVade);
+
+    ertesiGun.setDate(
+        ertesiGun.getDate()+1
+    );
+
+    if(!isIsGunu(ertesiGun)){
+
+        valor =
+            excelIsGunu(
+                reelVade,
+                1
+            );
+
+    }
 
 }
+
 
 
     let bugun = new Date();
