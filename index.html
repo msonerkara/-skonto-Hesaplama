@@ -580,64 +580,23 @@ function vadeHesapla(vadeTarihi){
     let reelVade = new Date(vadeTarihi);
 
     // vade tatilse ilk iş gününe çek
-    while(!isIsGunu(reelVade)){
-        reelVade.setDate(
-            reelVade.getDate() + 1
-        );
-    }
-// Reel Vade = düzeltilmiş vade + 1 iş günü
+  while(!isIsGunu(reelVade)){
+    reelVade.setDate(
+        reelVade.getDate() + 1
+    );
+}
+
 reelVade =
     excelIsGunu(
         reelVade,
         1
     );
 
-    // 1 iş günü ekle
-    let valor =
+let valor =
     new Date(reelVade);
 
+let bugun = new Date();
 
-    // valörün ertesi günü
-    let ertesiGun =
-        new Date(valor);
-
-    ertesiGun.setDate(
-        ertesiGun.getDate() + 1
-    );
-
-    let vadeTatildi =
-    !isIsGunu(vadeTarihi);
-
-if(vadeTatildi){
-
-    let ertesiGun =
-        new Date(reelVade);
-
-    ertesiGun.setDate(
-        ertesiGun.getDate()+1
-    );
-
-    if(!isIsGunu(ertesiGun)){
-
-        valor =
-            excelIsGunu(
-                reelVade,
-                1
-            );
-
-    }
-
-}
-
-
-
-    let bugun = new Date();
-
-    bugun = new Date(
-        bugun.getFullYear(),
-        bugun.getMonth(),
-        bugun.getDate()
-    );
 
     return Math.floor(
     (valor - bugun) / 86400000
