@@ -314,17 +314,29 @@ Ağırlıklı Ortalama Vade: 0 Gün
 
 <div id="cekParametre" class="result">
 
-<b>Faiz:</b> %0
+<b>📈 Faiz</b>
 
-<br><br>
+<input
+id="cekFaizAlt"
+inputmode="decimal"
+oninput="senkronFaiz()">
 
-<b>Komisyon:</b> %0
+<b>💰 Komisyon</b>
 
-<br><br>
+<input
+id="cekKomisyonAlt"
+inputmode="decimal"
+oninput="senkronKomisyon()">
 
-<b>Masraf:</b> 0,00 TL
+<b>🧾 Masraf</b>
+
+<input
+id="cekMasrafAlt"
+inputmode="decimal"
+oninput="senkronMasraf()">
 
 </div>
+
 
 
 <div id="cekSonuc" class="result">
@@ -1228,36 +1240,12 @@ ${ortalamaVade.toLocaleString(
             .replace(",",".")
         ) || 0;
 
-document
-.getElementById("cekParametre")
-.innerHTML = `
 
-<b>📈 Faiz:</b>
-% ${faiz.toLocaleString(
-    "tr-TR",
-    {
-        minimumFractionDigits:3,
-        maximumFractionDigits:3
-    }
-)}
+document.getElementById("cekFaizAlt").value = faiz;
 
-<br><br>
+document.getElementById("cekKomisyonAlt").value = komisyon;
 
-<b>💰 Komisyon:</b>
-% ${komisyon.toLocaleString(
-    "tr-TR",
-    {
-        minimumFractionDigits:3,
-        maximumFractionDigits:3
-    }
-)}
-
-<br><br>
-
-<b>🧾 Masraf:</b>
-${tl(masraf)} TL
-
-`;
+document.getElementById("cekMasrafAlt").value = masraf;
 
 
     let faizTutari =
@@ -1476,6 +1464,32 @@ function cekSil(index){
         index,
         1
     );
+
+    listeGuncelle();
+
+}
+function senkronFaiz(){
+
+    document.getElementById("cekFaiz").value =
+    document.getElementById("cekFaizAlt").value;
+
+    listeGuncelle();
+
+}
+
+function senkronKomisyon(){
+
+    document.getElementById("cekKomisyon").value =
+    document.getElementById("cekKomisyonAlt").value;
+
+    listeGuncelle();
+
+}
+
+function senkronMasraf(){
+
+    document.getElementById("cekMasraf").value =
+    document.getElementById("cekMasrafAlt").value;
 
     listeGuncelle();
 
