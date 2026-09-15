@@ -597,11 +597,7 @@ let valor =
 
 let bugun = new Date();
 
-bugun = new Date(
-    bugun.getFullYear(),
-    bugun.getMonth(),
-    bugun.getDate()
-);
+bugun = new Date();
 
 
 
@@ -847,7 +843,7 @@ ${tl(netOdeme)}
 <br><br>
 
 <b>Net Katkılı Oran:</b>
-% $${getiri.toLocaleString(
+% ${getiri.toLocaleString(
     "tr-TR",
     {
         minimumFractionDigits:2,
