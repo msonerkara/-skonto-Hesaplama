@@ -1319,17 +1319,37 @@ ${tl(netOdeme)}
 <br><br>
 
 <b>Basit Oran:</b>
-% ${basitOran.toFixed(2)}
+% ${basitOran.toLocaleString(
+    "tr-TR",
+    {
+        minimumFractionDigits:2,
+        maximumFractionDigits:2
+    }
+)}
+
 
 <br><br>
 
 <b>Katkılı Oran:</b>
-% ${katkiliOran.toFixed(2)}
+% ${katkiliOran.toLocaleString(
+    "tr-TR",
+    {
+        minimumFractionDigits:2,
+        maximumFractionDigits:2
+    }
+)}
 
 <br><br>
 
 <b>Net Katkılı Oran:</b>
-% ${getiri.toFixed(2)}
+% ${getiri.toLocaleString(
+    "tr-TR",
+    {
+        minimumFractionDigits:2,
+        maximumFractionDigits:2
+    }
+)}
+
 
 `;
 
