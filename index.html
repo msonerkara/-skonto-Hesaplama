@@ -312,6 +312,19 @@ Ağırlıklı Ortalama Vade: 0 Gün
 
 </div>
 
+<div id="cekParametre" class="result">
+
+<b>Faiz:</b> %0
+
+<br><br>
+
+<b>Komisyon:</b> %0
+
+<br><br>
+
+<b>Masraf:</b> 0,00 TL
+
+</div>
 
 
 <div id="cekSonuc" class="result">
@@ -1214,6 +1227,25 @@ ${ortalamaVade.toLocaleString(
             .value
             .replace(",",".")
         ) || 0;
+
+document
+.getElementById("cekParametre")
+.innerHTML = `
+
+<b>Faiz:</b>
+% ${faiz}
+
+<br><br>
+
+<b>Komisyon:</b>
+% ${komisyon}
+
+<br><br>
+
+<b>Masraf:</b>
+${tl(masraf)} TL
+
+`;
 
 
     let faizTutari =
