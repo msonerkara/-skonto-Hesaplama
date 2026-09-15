@@ -605,7 +605,7 @@ bugun = new Date(
 
 
 
-    return Math.floor(
+    return (
     (valor - bugun) / 86400000
 ) + 1;
 
@@ -1070,7 +1070,13 @@ ${tarihOlustur(
 <br>
 
 <b>Vade:</b>
-${cekler[i].gun} Gün
+${cekler[i].gun.toLocaleString(
+    "tr-TR",
+    {
+        minimumFractionDigits:2,
+        maximumFractionDigits:2
+    }
+)} Gün
 
 <br><br>
 
