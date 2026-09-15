@@ -1119,9 +1119,13 @@ ${tl(toplamTutar)} TL
 
 <br>
 
-${ortalamaVade.toFixed(0)} Gün
-
-`;
+${ortalamaVade.toLocaleString(
+    "tr-TR",
+    {
+        minimumFractionDigits:2,
+        maximumFractionDigits:2
+    }
+)} Gün
 
 
 
