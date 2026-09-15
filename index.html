@@ -597,6 +597,13 @@ let valor =
 
 let bugun = new Date();
 
+bugun = new Date(
+    bugun.getFullYear(),
+    bugun.getMonth(),
+    bugun.getDate()
+);
+
+
 
     return Math.floor(
     (valor - bugun) / 86400000
