@@ -585,6 +585,12 @@ function vadeHesapla(vadeTarihi){
             reelVade.getDate() + 1
         );
     }
+// Reel Vade = düzeltilmiş vade + 1 iş günü
+reelVade =
+    excelIsGunu(
+        reelVade,
+        1
+    );
 
     // 1 iş günü ekle
     let valor =
