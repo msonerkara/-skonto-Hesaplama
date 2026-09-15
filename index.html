@@ -1232,17 +1232,29 @@ document
 .getElementById("cekParametre")
 .innerHTML = `
 
-<b>Faiz:</b>
-% ${faiz}
+<b>📈 Faiz:</b>
+% ${faiz.toLocaleString(
+    "tr-TR",
+    {
+        minimumFractionDigits:3,
+        maximumFractionDigits:3
+    }
+)}
 
 <br><br>
 
-<b>Komisyon:</b>
-% ${komisyon}
+<b>💰 Komisyon:</b>
+% ${komisyon.toLocaleString(
+    "tr-TR",
+    {
+        minimumFractionDigits:3,
+        maximumFractionDigits:3
+    }
+)}
 
 <br><br>
 
-<b>Masraf:</b>
+<b>🧾 Masraf:</b>
 ${tl(masraf)} TL
 
 `;
