@@ -799,26 +799,6 @@ function hesapla(){
     document.getElementById("sonuc")
     .innerHTML = `
 
-<b>Toplam Çek Tutarı:</b>
-${tl(toplamTutar)}
-
-<br><br>
-
-<b>Ağırlıklı Ortalama Vade:</b>
-${ortalamaVade.toLocaleString(
-    "tr-TR",
-    {
-        minimumFractionDigits:2,
-        maximumFractionDigits:2
-    }
-)} Gün
-
-<br><br>
-
-<hr>
-
-<br>
-
 
 <b>Faiz Tutarı:</b>
 ${tl(faizTutari)}
@@ -1354,6 +1334,25 @@ ${ortalamaVade.toLocaleString(
     document
     .getElementById("cekSonuc")
     .innerHTML = `
+<b>Toplam Çek Tutarı:</b>
+${tl(toplamTutar)}
+
+<br><br>
+
+<b>Ağırlıklı Ortalama Vade:</b>
+${ortalamaVade.toLocaleString(
+    "tr-TR",
+    {
+        minimumFractionDigits:2,
+        maximumFractionDigits:2
+    }
+)} Gün
+
+<br><br>
+
+<hr>
+
+<br>
 
 <b>Faiz Tutarı:</b>
 ${tl(faizTutari)}
