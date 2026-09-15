@@ -240,25 +240,6 @@ Hesaplama sonucu burada görüntülenecektir.
 <h2>Çek İskonto</h2>
 
 
-<input
-id="cekFaiz"
-inputmode="decimal"
-oninput="listeGuncelle()"
-placeholder="Faiz Oranı %">
-
-
-<input
-id="cekKomisyon"
-inputmode="decimal"
-oninput="listeGuncelle()"
-placeholder="Komisyon Oranı %">
-
-
-<input
-id="cekMasraf"
-inputmode="decimal"
-oninput="listeGuncelle()"
-placeholder="Masraf">
 
 
 <div class="result">
@@ -317,23 +298,23 @@ Ağırlıklı Ortalama Vade: 0 Gün
 <b>📈 Faiz</b>
 
 <input
-id="cekFaizAlt"
+id="cekFaiz"
 inputmode="decimal"
-oninput="senkronFaiz()">
+oninput="listeGuncelle()">
 
 <b>💰 Komisyon</b>
 
 <input
-id="cekKomisyonAlt"
+id="cekKomisyon"
 inputmode="decimal"
-oninput="senkronKomisyon()">
+oninput="listeGuncelle()">
 
 <b>🧾 Masraf</b>
 
 <input
-id="cekMasrafAlt"
+id="cekMasraf"
 inputmode="decimal"
-oninput="senkronMasraf()">
+oninput="listeGuncelle()">
 
 </div>
 
@@ -1241,12 +1222,6 @@ ${ortalamaVade.toLocaleString(
         ) || 0;
 
 
-document.getElementById("cekFaizAlt").value = faiz;
-
-document.getElementById("cekKomisyonAlt").value = komisyon;
-
-document.getElementById("cekMasrafAlt").value = masraf;
-
 
     let faizTutari =
         (
@@ -1468,32 +1443,7 @@ function cekSil(index){
     listeGuncelle();
 
 }
-function senkronFaiz(){
 
-    document.getElementById("cekFaiz").value =
-    document.getElementById("cekFaizAlt").value;
-
-    listeGuncelle();
-
-}
-
-function senkronKomisyon(){
-
-    document.getElementById("cekKomisyon").value =
-    document.getElementById("cekKomisyonAlt").value;
-
-    listeGuncelle();
-
-}
-
-function senkronMasraf(){
-
-    document.getElementById("cekMasraf").value =
-    document.getElementById("cekMasrafAlt").value;
-
-    listeGuncelle();
-
-}
 
 
 </script>
